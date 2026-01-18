@@ -1,1 +1,900 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>epigon1 | Techno Producer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #333;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #fff;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #000;
+        }
+
+        /* Synth Switch */
+        .synth-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .synth-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+            background: #444;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .switch.active {
+            background: #00ff88;
+        }
+
+        .switch-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .switch.active .switch-thumb {
+            transform: translateX(24px);
+        }
+
+        .synth-status {
+            font-size: 12px;
+            color: #00ff88;
+            font-weight: bold;
+            display: none;
+        }
+
+        .synth-status.active {
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 120px 0 60px 0;
+            min-height: 100vh;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .hero h1 {
+            font-size: 80px;
+            background: linear-gradient(45deg, #00ff88, #00ccff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #888;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .card h3 {
+            color: #00ff88;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card h4 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #888;
+            line-height: 1.6;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 48px;
+            text-align: center;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 60px;
+        }
+
+        /* Music Grid */
+        .music-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .track-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+
+        .track-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .track-cover {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00ff88, #00ccff);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .track-title {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .track-info {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            border: none;
+            border-radius: 25px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Videos Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ccff;
+            box-shadow: 0 15px 40px rgba(0, 204, 255, 0.2);
+        }
+
+        .video-thumb {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #003311, #001144);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .video-views {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Tour Dates */
+        .tour-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tour-item {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .tour-item:hover {
+            border-color: #00ff88;
+            transform: translateX(10px);
+        }
+
+        .tour-date {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .date-box {
+            text-align: center;
+        }
+
+        .date-day {
+            font-size: 32px;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .date-month {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .tour-venue {
+            font-size: 20px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .tour-city {
+            color: #888;
+        }
+
+        .ticket-btn {
+            padding: 10px 30px;
+            background: #00ff88;
+            color: #000;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ticket-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.5);
+        }
+
+        /* Studio Page */
+        .studio-section {
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 2px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .studio-section h3 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .studio-section.brain { border-color: #00ff88; }
+        .studio-section.brain h3 { color: #00ff88; }
+        
+        .studio-section.sequencers { border-color: #00ccff; }
+        .studio-section.sequencers h3 { color: #00ccff; }
+        
+        .studio-section.roland { border-color: #ff4444; }
+        .studio-section.roland h3 { color: #ff4444; }
+        
+        .studio-section.synths { border-color: #cc44ff; }
+        .studio-section.synths h3 { color: #cc44ff; }
+        
+        .studio-section.effects { border-color: #ffcc00; }
+        .studio-section.effects h3 { color: #ffcc00; }
+        
+        .studio-section.signal { border-color: #999; }
+        .studio-section.signal h3 { color: #999; }
+        
+        .studio-section.philosophy { border-color: #00ff88; }
+        .studio-section.philosophy h3 { color: #00ff88; }
+
+        .device {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .device h4 {
+            color: #fff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .device p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+
+        /* Bio Page */
+        .bio-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .bio-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .bio-card p {
+            color: #aaa;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .highlights {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .highlights h3 {
+            color: #00ff88;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .highlights ul {
+            list-style: none;
+        }
+
+        .highlights li {
+            color: #aaa;
+            padding: 10px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .highlights li:last-child {
+            border-bottom: none;
+        }
+
+        /* Contact Page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .contact-label {
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .contact-link {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Background Animation */
+        .bg-circles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .bg-circles.active {
+            opacity: 1;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+
+        .circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            left: 10%;
+            top: 20%;
+            background: radial-gradient(circle, #00ff88, transparent);
+            animation: float1 15s infinite ease-in-out;
+        }
+
+        .circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            right: 15%;
+            top: 40%;
+            background: radial-gradient(circle, #00ccff, transparent);
+            animation: float2 18s infinite ease-in-out;
+        }
+
+        .circle:nth-child(3) {
+            width: 250px;
+            height: 250px;
+            left: 50%;
+            bottom: 20%;
+            background: radial-gradient(circle, #ff00ff, transparent);
+            animation: float3 20s infinite ease-in-out;
+        }
+
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-20px, 20px); }
+        }
+
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(-25px, 25px); }
+            66% { transform: translate(25px, -25px); }
+        }
+
+        @keyframes float3 {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(20px, 30px); }
+            66% { transform: translate(-30px, -20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid #333;
+            padding: 30px 0;
+            text-align: center;
+            color: #666;
+            margin-top: 60px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .hero p { font-size: 18px; }
+            .section-title { font-size: 36px; }
+            .nav-links { display: none; }
+            
+            .mobile-menu {
+                display: block;
+                background: none;
+                border: none;
+                color: #fff;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .nav-links.mobile-open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: #000;
+                padding: 20px;
+                border-bottom: 1px solid #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Circles -->
+    <div class="bg-circles" id="bgCircles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Synth Control -->
+    <div class="synth-control">
+        <span class="synth-label">SYNTH</span>
+        <div class="switch" id="synthSwitch">
+            <div class="switch-thumb"></div>
+        </div>
+        <span class="synth-status" id="synthStatus">ON</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">epigon1</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="music">Music</a></li>
+                <li><a href="#" class="nav-link" data-page="videos">Videos</a></li>
+                <li><a href="#" class="nav-link" data-page="tour">Tour</a></li>
+                <li><a href="#" class="nav-link" data-page="studio">Studio</a></li>
+                <li><a href="#" class="nav-link" data-page="bio">Bio</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div class="page active" id="home">
+        <div class="container">
+            <div class="hero">
+                <h1>epigon1</h1>
+                <p>Techno Producer & Sound Designer</p>
+                <button class="cta-button" onclick="showPage('music')">Explore Music</button>
+            </div>
+
+            <div class="home-grid">
+                <div class="card">
+                    <h3>Latest Release</h3>
+                    <h4>Industrial Dreams</h4>
+                    <p>Techno • 6:42</p>
+                    <button class="play-btn" style="margin-top: 20px;">▶ Play Now</button>
+                </div>
+                <div class="card">
+                    <h3>Next Show</h3>
+                    <h4>Fabric London</h4>
+                    <p>London, UK</p>
+                    <p style="color: #00ff88; font-weight: bold; margin-top: 10px;">15 Feb 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MUSIC PAGE -->
+    <div class="page" id="music">
+        <div class="container">
+            <h2 class="section-title">Releases</h2>
+            <div class="music-grid">
+                <div class="track-card">
+                    <div class="track-cover">🎵</div>
+                    <div class="track-title">Industrial Dreams</div>
+                    <div class="track-info">2024 • Techno • 6:42</div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+                <div class="track-card">
+                    <div class="track-cover">🎵</div>
+                    <div class="track-title">Digital Pulse</div>
+                    <div class="track-info">2024 • Dark Techno • 7:15</div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+                <div class="track-card">
+                    <div class="track-cover">🎵</div>
+                    <div class="track-title">Neon Nights</div>
+                    <div class="track-info">2024 • Minimal Techno • 5:58</div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+                <div class="track-card">
+                    <div class="track-cover">🎵</div>
+                    <div class="track-title">Acid Machine</div>
+                    <div class="track-info">2023 • Acid Techno • 8:22</div>
+                    <button class="play-btn">▶ Play</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIDEOS PAGE -->
+    <div class="page" id="videos">
+        <div class="container">
+            <h2 class="section-title">Videos</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumb">🎥</div>
+                    <div class="video-info">
+                        <div class="video-title">Live at Berghain 2024</div>
+                        <div class="video-views">15K views</div>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">🎛️</div>
+                    <div class="video-info">
+                        <div class="video-title">Studio Session: Making Industrial Dreams</div>
+                        <div class="video-views">8K views</div>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumb">🎬</div>
+                    <div class="video-info">
+                        <div class="video-title">Warehouse Rave Milano</div>
+                        <div class="video-views">22K views</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOUR PAGE -->
+    <div class="page" id="tour">
+        <div class="container">
+            <h2 class="section-title">Tour Dates</h2>
+            <div class="tour-list">
+                <div class="tour-item">
+                    <div class="tour-date">
+                        <div class="date-box">
+                            <div class="date-day">15</div>
+                            <div class="date-month">Feb 2025</div>
+                        </div>
+                        <div>
+                            <div class="tour-venue">Fabric London</div>
+                            <div class="tour-city">London, UK</div>
+                        </div>
+                    </div>
+                    <button class="ticket-btn">Tickets</button>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-date">
+                        <div class="date-box">
+                            <div class="date-day">22</div>
+                            <div class="date-month">Feb 2025</div>
+                        </div>
+                        <div>
+                            <div class="tour-venue">Berghain</div>
+                            <div class="tour-city">Berlin, DE</div>
+                        </div>
+                    </div>
+                    <button class="ticket-btn">Tickets</button>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-date">
+                        <div class="date-box">
+                            <div class="date-day">08</div>
+                            <div class="date-month">Mar 2025</div>
+                        </div>
+                        <div>
+                            <div class="tour-venue">Awakenings</div>
+                            <div class="tour-city">Amsterdam, NL</div>
+                        </div>
+                    </div>
+                    <button class="ticket-btn">Tickets</button>
+                </div>
+                <div class="tour-item">
+                    <div class="tour-date">
+                        <div class="date-box">
+                            <div class="date-day">15</div>
+                            <div class="date-month">Mar 2025</div>
+                        </div>
+                        <div>
+                            <div class="tour-venue">Dude Club</div>
+                            <div class="tour-city">Milano, IT</div>
+                        </div>
+                    </div>
+                    <button class="ticket-btn">Tickets</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STUDIO PAGE -->
+    <div class="page" id="studio">
+        <div class="container">
+            <h2 class="section-title">Studio Setup</h2>
+
+            <!-- Brain -->
+            <div class="studio-section brain">
+                <h3><span>🎛️</span> Il Cervello</h3>
+                <div class="device">
+                    <h4>MPC Live</h4>
+                    <p>Il sequencer principale che orchestra l'intero setup. Con i suoi 16 pad sensibili alla velocity e il workflow intuitivo, l'MPC Live è il cuore pulsante di ogni sessione. Perfetto per creare pattern complessi, gestire sample e controllare tutto l'hardware esterno via MIDI. La modalità standalone permette totale libertà creativa senza bisogno di computer.</p>
+                </div>
+            </div>
+
+            <!-- Sequencers -->
+            <div class="studio-section sequencers">
+                <h3><span>⚡</span> Sequencers & Samplers</h3>
+                <div class="device">
+                    <h4>Elektron Model:Samples</h4>
+                    <p>Sampler compatto ma potentissimo, ideale per drum patterns techno sporchi e industriali. I 6 track permettono layering complessi di kick, snare e percussioni. Gli effetti interni (overdrive, chorus, delay) aggiungono quel carattere grintoso essenziale per la dark techno.</p>
+                </div>
+                <div class="device">
+                    <h4>Elektron Model:Cycles</h4>
+                    <p>Il fratello FM del Model:Samples. Sei engine di sintesi FM-based perfetti per creare bassline acide, hi-hats metallici e texture atmosferiche. La machine learning integrata permette di trovare suoni unici e imprevedibili, perfetti per break e breakdown.</p>
+                </div>
+                <div class="device">
+                    <h4>Polyend Tracker</h4>
+                    <p>Approccio old-school al sequencing con interfaccia tracker moderna. Perfetto per arrangimenti complessi e manipolazione granulare dei sample. Il workflow verticale è ideale per costruire intere tracce complete, dalle intro ai breakdown. Gli euclidean patterns creano groove ipnotici impossibili da ottenere con sequencer tradizionali.</p>
+                </div>
+            </div>
+
+            <!-- Roland Zone -->
+            <div class="studio-section roland">
+                <h3><span>🔴</span> Roland Zone</h3>
+                <div class="device">
+                    <h4>Roland TR-6S</h4>
+                    <p>La drum machine moderna con il DNA delle leggendarie TR. 6 tracce con suoni classici 808, 909, 707 e samples custom.
