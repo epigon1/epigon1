@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>epigon1 | Techno Producer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Stili aggiuntivi per Twitter e YouTube */
+        .social-section {
+            margin-top: 60px;
+            padding: 40px 0;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .social-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 25px;
+            overflow: hidden;
+        }
+
+        .social-card h3 {
+            color: #00ff88;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+
+        /* Twitter Timeline Styling */
+        .twitter-timeline {
+            border-radius: 10px !important;
+        }
+
+        /* YouTube Videos Grid */
+        .youtube-videos {
+            display: grid;
+            gap: 15px;
+        }
+
+        .youtube-video {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #000;
+        }
+
+        .youtube-video iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .youtube-channel-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #ff0000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .youtube-channel-link:hover {
+            background: #cc0000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .spotify-embed iframe {
+            border-radius: 10px;
+        }
+
+        .view-all-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #1DB954;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .view-all-link:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Circles -->
+    <div class="bg-circles" id="bgCircles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">epigon1</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="music.html">Music</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="studio.html">Studio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Content -->
+    <main class="page-content">
+        <div class="container">
+            <div class="hero">
+                <h1>epigon1</h1>
+                <p>Techno Producer & Sound Designer</p>
+            </div>
+
+            <!-- Social Media Section - Direct embeds -->
+            <div class="social-section">
+                <div class="social-grid">
+                    <!-- Spotify -->
+                    <div class="social-card">
+                        <h3>
+                            <span>🎵</span>
+                            Spotify
+                        </h3>
+                        <div class="spotify-embed">
+                            <iframe 
+                                style="border-radius:10px; width: 100%;" 
+                                src="https://open.spotify.com/embed/artist/1au5rk7pcWVYyeVgtOpBdy?utm_source=generator&theme=0" 
+                                height="352" 
+                                frameBorder="0" 
+                                allowfullscreen="" 
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="https://open.spotify.com/artist/1au5rk7pcWVYyeVgtOpBdy" target="_blank" class="view-all-link">
+                                View All Tracks
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Twitter Feed -->
+                    <div class="social-card">
+                        <h3>
+                            <span>𝕏</span>
+                            Twitter
+                        </h3>
+                        <!-- Embed singolo tweet invece del timeline -->
+                        <blockquote class="twitter-tweet" data-theme="dark" data-chrome="noheader nofooter noborders">
+                            <a href="https://twitter.com/epigon14"></a>
+                        </blockquote>
+                        <div style="text-align: center; margin-top: 15px;">
+                            <a href="https://x.com/epigon14" target="_blank" class="view-all-link" style="background: #000; border: 1px solid #333;">
+                                View Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- YouTube Videos -->
+                    <div class="social-card">
+                        <h3>
+                            <span>📺</span>
+                            YouTube
+                        </h3>
+                        <div class="youtube-videos">
+                            <div class="youtube-video">
+                                <iframe 
+                                    src="https://www.youtube.com/embed?listType=user_uploads&list=epigon1" 
+                                    title="epigon1 Latest Videos" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                        <div style="text-align: center;">
+                            <a href="https://www.youtube.com/@epigon1/videos" target="_blank" class="youtube-channel-link">
+                                View All Videos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 epigon1. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Twitter Widget Script -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    
+    <!-- Main Script -->
+    <script src="js/script.js"></script>
+</body>
+</html>

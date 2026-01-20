@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music | epigon1</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .spotify-section {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .spotify-embed-large {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 2px solid #1DB954;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(29, 185, 84, 0.3);
+        }
+
+        .spotify-embed-large h3 {
+            color: #1DB954;
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .spotify-profile-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .spotify-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #1DB954;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+        }
+
+        .spotify-btn:hover {
+            background: #1ed760;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(29, 185, 84, 0.6);
+        }
+
+        .music-info {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .music-info h4 {
+            color: #00ff88;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .music-info p {
+            color: #aaa;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+            border: 1px solid #333;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .platform-card:hover {
+            border-color: #00ff88;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.2);
+        }
+
+        .platform-card .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .platform-card h5 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .platform-card a {
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .platform-card a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-circles" id="bgCircles">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="synth-control">
+        <span class="synth-label">SYNTH</span>
+        <div class="switch" id="synthSwitch">
+            <div class="switch-thumb"></div>
+        </div>
+        <span class="synth-status" id="synthStatus">ON</span>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">epigon1</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="music.html" class="active">Music</a></li>
+                <li><a href="videos.html">Videos</a></li>
+                <li><a href="tour.html">Tour</a></li>
+                <li><a href="studio.html">Studio</a></li>
+                <li><a href="bio.html">Bio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <h2 class="section-title">Music</h2>
+            
+            <div class="spotify-section">
+                <!-- Spotify Embed Grande -->
+                <div class="spotify-embed-large">
+                    <h3>
+                        <span>🎵</span>
+                        Stream on Spotify
+                    </h3>
+                    <iframe 
+                        style="border-radius:12px; width: 100%;" 
+                        src="https://open.spotify.com/embed/artist/1au5rk7pcWVYyeVgtOpBdy?utm_source=generator&theme=0" 
+                        height="500" 
+                        frameBorder="0" 
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                        loading="lazy">
+                    </iframe>
+                    
+                    <div class="spotify-profile-link">
+                        <a href="https://open.spotify.com/artist/1au5rk7pcWVYyeVgtOpBdy" target="_blank" class="spotify-btn">
+                            🎧 Open in Spotify
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div class="music-info">
+                    <h4>Discografia Completa</h4>
+                    <p>
+                        Esplora tutte le mie produzioni techno su Spotify. Dalle release su label internazionali 
+                        ai miei ultimi singoli, troverai l'intera discografia in continuo aggiornamento.
+                        Ogni traccia è un viaggio attraverso paesaggi sonori industriali e atmosfere ipnotiche.
+                    </p>
+                </div>
+
+                <!-- Altre Piattaforme -->
+                <div class="platforms">
+                    <div class="platform-card">
+                        <div class="icon">🎵</div>
+                        <h5>SoundCloud</h5>
+                        <a href="https://soundcloud.com/epigon1" target="_blank">soundcloud.com/epigon1</a>
+                    </div>
+                    <div class="platform-card">
+                        <div class="icon">💿</div>
+                        <h5>Bandcamp</h5>
+                        <a href="https://epigon1.bandcamp.com" target="_blank">epigon1.bandcamp.com</a>
+                    </div>
+                    <div class="platform-card">
+                        <div class="icon">🍎</div>
+                        <h5>Apple Music</h5>
+                        <a href="https://music.apple.com/it/artist/epigon1/1456590710" target="_blank">Listen on Apple Music</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 epigon1. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
