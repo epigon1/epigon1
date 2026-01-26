@@ -16,14 +16,18 @@ async function loadComponent(elementId, filePath) {
 
 // Carica header e footer quando la pagina è pronta
 document.addEventListener('DOMContentLoaded', async function() {
+    console.log('🎵 Caricamento componenti...');
+    
     // Carica header
     await loadComponent('header-placeholder', 'header.html');
     
     // Carica footer
     await loadComponent('footer-placeholder', 'footer.html');
     
-    // Aspetta un momento per assicurarsi che tutto sia caricato
+    // Aspetta che i componenti siano completamente caricati
     setTimeout(() => {
+        console.log('✅ Componenti caricati, inizializzo menu...');
+        
         // Inizializza il menu mobile
         initMobileMenu();
         
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         // Evidenzia la pagina corrente nel menu
         highlightCurrentPage();
-    }, 100);
+    }, 200);
 });
 
 // Funzione per il menu mobile
@@ -40,34 +44,58 @@ function initMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
 
-    if (mobileMenuBtn && navLinks) {
-        mobileMenuBtn.addEventListener('click', function() {
-            this.classList.toggle('active');
-            navLinks.classList.toggle('active');
-        });
+    console.log('Menu button:', mobileMenuBtn);
+    console.log('Nav links:', navLinks);
 
-        // Chiudi menu quando clicchi su un link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenuBtn.classList.remove('active');
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Chiudi menu quando clicchi fuori
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                mobileMenuBtn.classList.remove('active');
-                navLinks.classList.remove('active');
-            }
-        });
+    if (!mobileMenuBtn || !navLinks) {
+        console.error('❌ Menu elements not found!');
+        return;
     }
+
+    console.log('✅ Menu trovato, aggiungo event listeners...');
+
+    // Toggle menu quando clicchi sul bottone
+    mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        console.log('🔘 Menu button clicked');
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        console.log('Menu active:', navLinks.classList.contains('active'));
+    });
+
+    // Chiudi menu quando clicchi su un link
+    const menuLinks = document.querySelectorAll('.nav-links a');
+    console.log('Menu links trovati:', menuLinks.length);
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('Link clicked, closing menu');
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Chiudi menu quando clicchi fuori
+    document.addEventListener('click', function(e) {
+        if (navLinks.classList.contains('active') && 
+            !mobileMenuBtn.contains(e.target) && 
+            !navLinks.contains(e.target)) {
+            console.log('Clicked outside, closing menu');
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
+    });
+
+    console.log('✅ Menu mobile inizializzato!');
 }
 
 // Funzione contatore visite
 function initVisitorCounter() {
     const counterElement = document.getElementById('visitorCount');
-    if (!counterElement) return;
+    if (!counterElement) {
+        console.log('⚠️ Visitor counter not found');
+        return;
+    }
 
     let count = localStorage.getItem('visitorCount');
     
@@ -80,6 +108,7 @@ function initVisitorCounter() {
     count++;
     localStorage.setItem('visitorCount', count);
     animateCounter(counterElement, count);
+    console.log('✅ Visitor counter:', count);
 }
 
 function animateCounter(element, target) {
@@ -113,4 +142,5 @@ function highlightCurrentPage() {
             link.classList.add('active');
         }
     });
+    console.log('✅ Current page highlighted:', currentPage);
 }
