@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,48 +159,21 @@
             color: #888;
             font-size: 14px;
         }
-
-        .loading {
-            text-align: center;
-            color: #888;
-            padding: 40px;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
-    <div class="bg-circles" id="bgCircles">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
 
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo">epigon1</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li><a href="videos.html" class="active">Videos</a></li>
-                <li><a href="studio.html">Studio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    <!-- CONTENUTO -->
     <main class="page-content">
         <div class="container">
             <h2 class="section-title">Videos</h2>
             
             <div class="youtube-section">
-                <!-- Video Principale - Ultimi Upload -->
                 <div class="youtube-main">
-                    <h3>
-                        <span>📺</span>
-                        Latest Uploads
-                    </h3>
+                    <h3><span>📺</span> Latest Uploads</h3>
                     <div class="youtube-embed-large">
-                        <!-- Playlist automatica degli ultimi upload -->
                         <iframe 
                             src="https://www.youtube.com/embed?listType=playlist&list=UU3GvE-VZP2Nx7tMWvG6vMbg" 
                             title="epigon1 Latest Videos" 
@@ -216,21 +189,18 @@
                     </div>
                 </div>
 
-                <!-- Info -->
                 <div class="video-info">
                     <h4>Video & Live Performances</h4>
                     <p>
-                        Scopri i miei ultimi video: live set, studio sessions, e produzioni video. 
-                        Dal dietro le quinte della produzione musicale ai set completi nei club più importanti d'Europa. 
-                        Iscriviti al canale per non perdere i prossimi contenuti.
+                        Discover my latest videos: live sets, studio sessions, and video productions. 
+                        From behind the scenes of music production to complete sets in Europe's most important clubs. 
+                        Subscribe to the channel to not miss upcoming content.
                     </p>
                 </div>
 
-                <!-- Playlist Pubbliche -->
                 <div class="playlists-section">
                     <h3>Playlists</h3>
                     <div class="playlists-grid">
-                        <!-- Playlist 1 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -246,7 +216,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 2 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -262,7 +231,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 3 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -278,7 +246,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 4 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -294,7 +261,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 5 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -310,7 +276,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 6 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -326,7 +291,6 @@
                             </div>
                         </div>
 
-                        <!-- Playlist 7 -->
                         <div class="playlist-card">
                             <div class="playlist-embed">
                                 <iframe 
@@ -347,12 +311,9 @@
         </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 epigon1. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
 
-    <script src="js/script.js"></script>
+    <script src="js/components.js"></script>
 </body>
 </html>

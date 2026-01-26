@@ -6,7 +6,6 @@
     <title>epigon1 | Techno Producer</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Stili aggiuntivi per Twitter e YouTube */
         .social-section {
             margin-top: 60px;
             padding: 40px 0;
@@ -37,12 +36,29 @@
             font-weight: 600;
         }
 
-        /* Twitter Timeline Styling */
-        .twitter-timeline {
-            border-radius: 10px !important;
+        .spotify-embed iframe {
+            border-radius: 10px;
         }
 
-        /* YouTube Videos Grid */
+        .view-all-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #1DB954;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .view-all-link:hover {
+            background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
+        }
+
         .youtube-videos {
             display: grid;
             gap: 15px;
@@ -50,7 +66,7 @@
 
         .youtube-video {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 10px;
@@ -86,29 +102,6 @@
             box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
         }
 
-        .spotify-embed iframe {
-            border-radius: 10px;
-        }
-
-        .view-all-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background: #1DB954;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 13px;
-            transition: all 0.3s;
-        }
-
-        .view-all-link:hover {
-            background: #1ed760;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(29, 185, 84, 0.4);
-        }
-
         @media (max-width: 1024px) {
             .social-grid {
                 grid-template-columns: 1fr;
@@ -117,28 +110,10 @@
     </style>
 </head>
 <body>
-    <!-- Background Circles -->
-    <div class="bg-circles" id="bgCircles">
-        <div class="circle"></div>
-        <div class="circle"></div>
-        <div class="circle"></div>
-    </div>
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="index.html" class="logo">epigon1</a>
-            <ul class="nav-links">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="music.html">Music</a></li>
-                <li><a href="videos.html">Videos</a></li>
-                <li><a href="studio.html">Studio</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Home Content -->
+    <!-- CONTENUTO -->
     <main class="page-content">
         <div class="container">
             <div class="hero">
@@ -146,15 +121,11 @@
                 <p>Techno Producer & Sound Designer</p>
             </div>
 
-            <!-- Social Media Section - Direct embeds -->
             <div class="social-section">
                 <div class="social-grid">
                     <!-- Spotify -->
                     <div class="social-card">
-                        <h3>
-                            <span>🎵</span>
-                            Spotify
-                        </h3>
+                        <h3><span>🎵</span> Spotify</h3>
                         <div class="spotify-embed">
                             <iframe 
                                 style="border-radius:10px; width: 100%;" 
@@ -173,13 +144,9 @@
                         </div>
                     </div>
 
-                    <!-- Twitter Feed -->
+                    <!-- Twitter -->
                     <div class="social-card">
-                        <h3>
-                            <span>𝕏</span>
-                            Twitter
-                        </h3>
-                        <!-- Embed singolo tweet invece del timeline -->
+                        <h3><span>𝕏</span> Twitter</h3>
                         <blockquote class="twitter-tweet" data-theme="dark" data-chrome="noheader nofooter noborders">
                             <a href="https://twitter.com/epigon14"></a>
                         </blockquote>
@@ -190,18 +157,15 @@
                         </div>
                     </div>
 
-                    <!-- YouTube Videos -->
+                    <!-- YouTube -->
                     <div class="social-card">
-                        <h3>
-                            <span>📺</span>
-                            YouTube
-                        </h3>
+                        <h3><span>📺</span> YouTube</h3>
                         <div class="youtube-videos">
                             <div class="youtube-video">
                                 <iframe 
-                                    src="https://www.youtube.com/embed?listType=user_uploads&list=epigon1" 
+                                    src="https://www.youtube.com/embed?listType=playlist&list=UU3GvE-VZP2Nx7tMWvG6vMbg" 
                                     title="epigon1 Latest Videos" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     allowfullscreen>
                                 </iframe>
                             </div>
@@ -217,17 +181,10 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 epigon1. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- FOOTER -->
+    <div id="footer-placeholder"></div>
 
-    <!-- Twitter Widget Script -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    
-    <!-- Main Script -->
-    <script src="js/script.js"></script>
+    <script src="js/components.js"></script>
 </body>
 </html>
