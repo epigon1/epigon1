@@ -76,11 +76,13 @@ nav {
     display: none;
     flex-direction: column;
     gap: 5px;
-    background: none;
-    border: none;
+    background: red; /* DEBUG: rosso per vedere se c'è */
+    border: 2px solid yellow; /* DEBUG */
     cursor: pointer;
-    padding: 5px;
+    padding: 10px;
     z-index: 1001;
+    width: 40px;
+    height: 40px;
 }
 
 .mobile-menu-btn span {
