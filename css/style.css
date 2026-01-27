@@ -51,6 +51,7 @@ nav {
     text-decoration: none;
 }
 
+/* Menu Desktop - DEFAULT */
 .nav-links {
     display: flex;
     gap: 20px;
@@ -71,7 +72,7 @@ nav {
     background: linear-gradient(45deg, #00ff88, #00ccff);
 }
 
-/* Mobile Menu Button */
+/* Mobile Menu Button - nascosto su desktop */
 .mobile-menu-btn {
     display: none;
     flex-direction: column;
