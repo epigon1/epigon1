@@ -49,6 +49,7 @@ nav {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-decoration: none;
+    z-index: 1001;
 }
 
 /* Menu Desktop - DEFAULT */
@@ -682,12 +683,72 @@ footer {
     margin-top: 60px;
 }
 
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.visitor-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.counter-number {
+    color: #00ff88;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+    /* Show mobile menu button */
+    .mobile-menu-btn {
+        display: flex;
+    }
+    
+    /* Hide menu by default on mobile */
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.98);
+        flex-direction: column;
+        padding: 20px;
+        gap: 0;
+        border-bottom: 1px solid #333;
+    }
+    
+    /* Show menu when active */
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #222;
+    }
+    
+    .nav-links li:last-child {
+        border-bottom: none;
+    }
+    
+    .nav-links a {
+        display: block;
+        padding: 15px;
+        width: 100%;
+    }
+    
+    /* Other responsive adjustments */
     .hero h1 { font-size: 48px; }
     .hero p { font-size: 18px; }
     .section-title { font-size: 36px; }
-    .nav-links { display: none; }
     
     .tour-item {
         flex-direction: column;
@@ -698,5 +759,13 @@ footer {
     .tour-date {
         flex-direction: column;
         gap: 15px;
+    }
+    
+    /* Adjust synth control on mobile */
+    .synth-control {
+        top: 85px;
+        right: 10px;
+        padding: 10px;
+        scale: 0.9;
     }
 }
